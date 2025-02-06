@@ -42,6 +42,7 @@ connectDb()
     app.use('/api/users', require('./routes/userRegistration.routes'));
     app.use('/api/chat/doctorsRegistration', require('./routes/Chat/doctorsRegistration.routes'));
     app.use('/api/ai/skinType', require('./routes/AI/SkinType.routes'));
+    app.use('/api/changePassword', require('./routes/ChangePassword.routes'));
 
     // Middleware for socket authentication
     io.use((socket, next) => {
@@ -56,8 +57,8 @@ connectDb()
         next();
       } catch (err) {
         next(new Error('Authentication error: Invalid or expired token'));
-      }
-    });
+      } 
+    }); 
 
     // Real-Time Chat - Socket handler
     io.on('connection', (socket) => {
