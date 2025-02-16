@@ -69,10 +69,38 @@ const loginUser = async (req, res) => {
     }
 };
 
+const getAllUsers = async(req,res)=>{
+    try{
+        const resp = await regModel.find();
+        res.status(201).send({name:resp});
+
+    }catch(error){
+        console.log("Internal Error occured",error);
+        res.status(500).send({message:error});
+
+        
+    }
+}
+
+const getUserNameById = async(req,res)=>{
+    try{
+        const userId = req.params.id;
+        const resp = await regModel.findById(userId);
+        res.status(200).send({resp});
+
+    }catch(error){
+        console.log(error);
+        res.status(500).send({error:'Server error',error});
+        
+    }
+}
+
 
 
 module.exports = {
     register,
-    loginUser
+    loginUser,
+    getAllUsers,
+    getUserNameById
 }
  
